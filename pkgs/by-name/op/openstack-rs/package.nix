@@ -6,6 +6,18 @@
   installShellFiles,
   versionCheckHook,
   nix-update-script,
+
+  withAsync ? true,
+  withBlockStorage ? true,
+  withCompute ? true,
+  withContainerInfra ? true,
+  withDns ? true,
+  withIdentity ? true,
+  withImage ? true,
+  withLoadBalancer ? true,
+  withNetwork ? true,
+  withObjectStore ? true,
+  withPlacement ? true,
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "openstack-rs";
@@ -23,6 +35,20 @@ rustPlatform.buildRustPackage (finalAttrs: {
   nativeBuildInputs = [
     installShellFiles
   ];
+
+  buildNoDefaultFeatures = true;
+  buildFeatures =
+    lib.optional withAsync "openstack_sdk/async"
+    ++ lib.optional withBlockStorage "openstack_cli/block_storage"
+    ++ lib.optional withCompute "openstack_cli/compute"
+    ++ lib.optional withContainerInfra "openstack_cli/container_infra"
+    ++ lib.optional withDns "openstack_cli/dns"
+    ++ lib.optional withIdentity "openstack_cli/identity"
+    ++ lib.optional withImage "openstack_cli/image"
+    ++ lib.optional withLoadBalancer "openstack_cli/load_balancer"
+    ++ lib.optional withNetwork "openstack_cli/network"
+    ++ lib.optional withObjectStore "openstack_cli/object_store"
+    ++ lib.optional withPlacement "openstack_cli/placement";
 
   postInstall = lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
     installShellCompletion --cmd osc \
