@@ -9,6 +9,7 @@
   six,
   numpy,
   cffi,
+  g2p_en,
   openfst,
   replaceVars,
   callPackage,
@@ -67,6 +68,7 @@ buildPythonPackage rec {
     numpy
     cffi
     six
+    g2p_en
   ];
 
   doCheck = false; # no tests exist
@@ -75,7 +77,7 @@ buildPythonPackage rec {
     description = "Python Kaldi speech recognition";
     homepage = "https://github.com/daanzu/kaldi-active-grammar";
     license = licenses.agpl3Plus;
-    maintainers = [ ];
+    maintainers = with lib.maintainers; [ lykos153 ];
     # Other platforms are supported upstream.
     platforms = platforms.linux;
   };
