@@ -5297,6 +5297,8 @@ self: super: with self; {
 
   fyta-cli = callPackage ../development/python-modules/fyta-cli { };
 
+  g2p_en = callPackage ../development/python-modules/g2p_en { };
+  
   g2pkk = callPackage ../development/python-modules/g2pkk { };
 
   galario = toPythonModule (
