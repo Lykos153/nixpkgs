@@ -3546,6 +3546,8 @@ self: super: with self; {
 
   dist-meta = callPackage ../development/python-modules/dist-meta { };
 
+  distance = callPackage ../development/python-modules/distance { };
+
   distlib = callPackage ../development/python-modules/distlib { };
 
   distorm3 = callPackage ../development/python-modules/distorm3 { };
