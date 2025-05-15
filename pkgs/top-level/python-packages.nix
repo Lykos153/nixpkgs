@@ -3507,6 +3507,8 @@ self: super: with self; {
 
   discid = callPackage ../development/python-modules/discid { };
 
+  diskimage-builder = callPackage ../by-name/di/diskimage-builder/unwrapped.nix { };
+
   discogs-client = callPackage ../development/python-modules/discogs-client { };
 
   discordpy = callPackage ../development/python-modules/discordpy { };
