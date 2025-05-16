@@ -6919,6 +6919,8 @@ self: super: with self; {
 
   irisclient = callPackage ../development/python-modules/irisclient { };
 
+  ironic-python-agent-builder = callPackage ../by-name/ir/ironic-python-agent-builder/unwrapped.nix { };
+
   isal = callPackage ../development/python-modules/isal { };
 
   isbnlib = callPackage ../development/python-modules/isbnlib { };
