@@ -4075,6 +4075,8 @@ self: super: with self; {
 
   dbgpu = callPackage ../development/python-modules/dbgpu { };
 
+  dbscan1d = callPackage ../development/python-modules/dbscan1d { };
+
   dbt-adapters = callPackage ../development/python-modules/dbt-adapters { };
 
   dbt-bigquery = callPackage ../development/python-modules/dbt-bigquery { };
@@ -6103,6 +6105,8 @@ self: super: with self; {
   flask-assets = callPackage ../development/python-modules/flask-assets { };
 
   flask-babel = callPackage ../development/python-modules/flask-babel { };
+
+  flask-basicauth = callPackage ../development/python-modules/flask-basicauth { };
 
   flask-bcrypt = callPackage ../development/python-modules/flask-bcrypt { };
 
@@ -19326,6 +19330,8 @@ self: super: with self; {
 
   sqlite-fts4 = callPackage ../development/python-modules/sqlite-fts4 { };
 
+  sqlite-icu = callPackage ../development/python-modules/sqlite-icu { };
+
   sqlite-migrate = callPackage ../development/python-modules/sqlite-migrate { };
 
   sqlite-utils = callPackage ../development/python-modules/sqlite-utils { };
@@ -21653,6 +21659,8 @@ self: super: with self; {
   uvloop = callPackage ../development/python-modules/uvloop { };
 
   uwsgi-chunked = callPackage ../development/python-modules/uwsgi-chunked { };
+
+  uwsgi-tools = callPackage ../development/python-modules/uwsgi-tools { };
 
   uxsim = callPackage ../development/python-modules/uxsim { };
 
