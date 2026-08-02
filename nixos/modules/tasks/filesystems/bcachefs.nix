@@ -20,6 +20,24 @@ let
         printf "enter passphrase for $name: "
     }
 
+    isLocked() {
+      local path="$1"
+
+      local output="$(bcachefs unlock -c $path 2> /dev/null)"
+      local returnCode="$?"
+      case "$output" in
+          "Device has no encryption"|"Device is encrypted and unlocked")
+              return 1
+              ;;
+          "Device is encrypted and locked")
+              return 0
+              ;;
+          *)
+              return "$returnCode" # Fallback in case the thre-state output is not available
+              ;;
+      esac
+    }
+
     tryUnlock() {
         local name="$1"
         local path="$2"
@@ -48,7 +66,7 @@ let
             path=$target
         fi
 
-        if bcachefs unlock -c $path > /dev/null 2> /dev/null; then    # test for encryption
+        if isLocked "$path"; then
             prompt $name
             until bcachefs unlock $path 2> /dev/null; do              # repeat until successfully unlocked
                 printf "unlocking failed!\n"
@@ -147,7 +165,19 @@ let
         unitConfig.DefaultDependencies = false;
         serviceConfig = {
           Type = "oneshot";
-          ExecCondition = "${cfg.package}/bin/bcachefs unlock -c \"${device}\"";
+          ExecCondition =
+            let
+              checkLocked = pkgs.writeShellApplication {
+                name = "bcachefs-check-locked";
+                runtimeInputs = [ pkgs.bcachefs-tools ];
+                text = ''
+                  path="$1"
+                  ${commonFunctions}
+                  isLocked "$path"
+                '';
+              };
+            in
+            "${checkLocked}/bin/bcachefs-check-locked \"${device}\"";
           Restart = "on-failure";
           RestartMode = "direct";
           # Ideally, this service would lock the key on stop.
