@@ -4507,6 +4507,8 @@ self: super: with self; {
   # LTS with mainsteam support
   django = self.django_5;
 
+  django-activity-stream = callPackage ../development/python-modules/django-activity-stream { };
+
   django-admin-datta = callPackage ../development/python-modules/django-admin-datta { };
 
   django-admin-sortable2 = callPackage ../development/python-modules/django-admin-sortable2 { };
