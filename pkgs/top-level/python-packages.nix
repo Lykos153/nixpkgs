@@ -9637,6 +9637,8 @@ self: super: with self; {
   linetable = callPackage ../development/python-modules/linetable { };
 
   lingua = callPackage ../development/python-modules/lingua { };
+  
+  lingua-language-detector = callPackage ../development/python-modules/lingua-language-detector { };
 
   lingva = callPackage ../development/python-modules/lingva { };
 
