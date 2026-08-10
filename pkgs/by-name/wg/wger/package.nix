@@ -28,6 +28,7 @@ python3Packages.buildPythonApplication rec {
     boto3
     celery
     crispy-bootstrap5
+    cryptography
     django-activity-stream
     django-allauth
     django-axes
@@ -81,7 +82,7 @@ python3Packages.buildPythonApplication rec {
     export DATABASE_URL=sqlite:///build.sqlite3
     export STATIC_ROOT=$out/share/wger/static
     PYTHONPATH=$out/${python3Packages.python.sitePackages}:$PYTHONPATH \
-      $out/bin/wger collectstatic --noinput
+      python3 manage.py collectstatic --no-input
   '';
 
   passthru = {
