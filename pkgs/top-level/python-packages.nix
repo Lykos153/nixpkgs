@@ -4791,6 +4791,8 @@ self: super: with self; {
 
   django-ratelimit = callPackage ../development/python-modules/django-ratelimit { };
 
+  django-recaptcha = callPackage ../development/python-modules/django-recaptcha { };
+
   django-recurrence = callPackage ../development/python-modules/django-recurrence { };
 
   django-redis = callPackage ../development/python-modules/django-redis { };
