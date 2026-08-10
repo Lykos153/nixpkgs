@@ -12348,6 +12348,8 @@ self: super: with self; {
 
   openfga-sdk = callPackage ../development/python-modules/openfga-sdk { };
 
+  openfoodfacts = callPackage ../development/python-modules/openfoodfacts { };
+
   openhomedevice = callPackage ../development/python-modules/openhomedevice { };
 
   openidc-client = callPackage ../development/python-modules/openidc-client { };
