@@ -4837,6 +4837,8 @@ self: super: with self; {
 
   django-soft-delete = callPackage ../development/python-modules/django-soft-delete { };
 
+  django-sortedm2m = callPackage ../development/python-modules/django-sortedm2m { };
+
   django-split-settings = callPackage ../development/python-modules/django-split-settings { };
 
   django-sql-utils = callPackage ../development/python-modules/django-sql-utils { };
