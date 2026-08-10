@@ -4547,6 +4547,8 @@ self: super: with self; {
 
   django-bootstrap5 = callPackage ../development/python-modules/django-bootstrap5 { };
 
+  django-bootstrap-breadcrumbs2 = callPackage ../development/python-modules/django-bootstrap-breadcrumbs2 { };
+
   django-cachalot = callPackage ../development/python-modules/django-cachalot { };
 
   django-cache-memoize = callPackage ../development/python-modules/django-cache-memoize { };
