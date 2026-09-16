@@ -323,20 +323,22 @@ in
               '';
           ExecStart =
             let
-              cmd = lib.strings.join " " (
-                (lib.optionals since0_16 [
-                  "STALWART_RECOVERY_MODE=${toString cfg.recovery.enable}"
-                  "STALWART_RECOVERY_MODE_PORT=${toString cfg.recovery.port}"
-                  "STALWART_RECOVERY_ADMIN=${lib.escapeShellArg cfg.admin.username}:`cat ${lib.escapeShellArg cfg.admin.passwordFile}`"
-                  "STALWART_PUBLIC_URL=${cfg.url}"
-                ])
-                ++ [
-                  (lib.getExe cfg.package)
-                  "--config=${configFile}"
-                ]
-              );
+              stalwartEnv = lib.optionalString cfg.admin.enable "STALWART_RECOVERY_ADMIN=${lib.escapeShellArg cfg.admin.username}:`cat ${lib.escapeShellArg cfg.admin.passwordFile}`";
+              stalwartCmd = "${lib.getExe cfg.package} --config=${configFile}";
+              cmd = lib.optionalString cfg.recovery.enable "${stalwartEnv} ${stalwartCmd}";
             in
-            "${lib.getExe pkgs.bash} -c ${lib.escapeShellArg cmd}";
+            if (since0_16 && cfg.admin.enable) then
+              "${lib.getExe pkgs.bash} -c ${lib.escapeShellArg cmd}"
+            else
+              stalwartCmd;
+
+          Environment = lib.optionals since0_16 [
+              "STALWART_PUBLIC_URL=${cfg.url}"
+            ]
+            ++ lib.optionals cfg.recovery.enable [
+              "STALWART_RECOVERY_MODE=${toString cfg.recovery.enable}"
+              "STALWART_RECOVERY_MODE_PORT=${toString cfg.recovery.port}"
+          ];
           EnvironmentFile = lib.optional (cfg.environmentFile != null) cfg.environmentFile;
           LoadCredential = lib.mapAttrsToList (key: value: "${key}:${value}") cfg.credentials;
 
