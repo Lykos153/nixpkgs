@@ -289,8 +289,6 @@ do
 				end
 				if op.matchOn ~= nil and op.matchOn ~= json.null and op.matchOn ~= "*" and not match_fields then err("<operation: " .. op["@type"] .. " " .. op.object .. ">", "expected `matchOn` field to be null, \"*\", or an array of strings (got `%s`)", jty(op.matchOn)) end
 
-				-- ignore empty object sets, so stalwart-cli doesn't complain about them
-				if not next(op.value) then goto continue end
 				for id, val in pairs(op.value) do
 					local parent = "<" .. op.object .. " #" .. id .. ">"
 					if match_fields then
